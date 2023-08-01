@@ -1,5 +1,8 @@
+require ('app/classes/background.rb')
+
 def init args
   args.state.gamestate = :mainmenu
+  args.state.Background = Background.new()
 end
 
 
@@ -18,5 +21,5 @@ def tick args
 end
 
 def mainmenu_tick args
-  args.outputs.solids << {x:0, y:0, w:1280, h:720, r:0, g:0, b:128}
+  args.outputs.primitives << args.state.Background
 end
