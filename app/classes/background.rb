@@ -14,7 +14,7 @@ class Background < Solid
     self.h = 720
     self.r = 0
     self.g = 0
-    self.b = 64
+    self.b = 128
     self.blendmode_enum =  1
   end
 
