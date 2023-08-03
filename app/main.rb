@@ -1,8 +1,10 @@
 require ('app/classes/background.rb')
+require ('app/classes/mainmenu.rb')
 
 def init args
   args.state.gamestate = :mainmenu
   args.state.Background = Background.new()
+  args.state.MainMenu = MainMenu.new()
 end
 
 
@@ -21,9 +23,11 @@ def tick args
 end
 
 def mainmenu_tick args
+  if args.inputs.keyboard.key_down.s
+    args.state.MainMenu.down()
+  elsif args.inputs.keyboard.key_down.w
+    args.state.MainMenu.up()
+  end
   args.outputs.primitives << args.state.Background
-  args.outputs.primitives << {x:320, y:180, w:640, h:360, b:32}.solid!
-  args.outputs.primitives << {x:328, y:532, w:640, h:40,  text:"New", r:255, g:255, b: 255}.label!
-  args.outputs.primitives << {x:320, y:500, w:640, h:40, b:64, a:215}.solid!
-
+  args.outputs.primitives << args.state.MainMenu.draw()
 end
