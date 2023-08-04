@@ -23,9 +23,9 @@ def tick args
 end
 
 def mainmenu_tick args
-  if args.inputs.keyboard.key_down.s
+  if args.inputs.keyboard.key_up.down || args.inputs.keyboard.key_up.s
     args.state.MainMenu.down()
-  elsif args.inputs.keyboard.key_down.w
+  elsif args.inputs.keyboard.key_up.up || args.inputs.keyboard.key_up.w
     args.state.MainMenu.up()
   end
   args.outputs.primitives << args.state.Background
