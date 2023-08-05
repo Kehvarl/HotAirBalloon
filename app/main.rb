@@ -1,10 +1,11 @@
 require ('app/classes/background.rb')
 require ('app/classes/mainmenu.rb')
+require ('app/classes/gamestate.rb')
 
 def init args
   args.state.gamestate = :mainmenu
   args.state.Background = Background.new()
-  args.state.MainMenu = MainMenu.new()
+  args.state.Current = MainMenuState.new()
 end
 
 
@@ -13,21 +14,13 @@ def tick args
     init args
   end
 
-  case args.state.gamestate
-  when :mainmenu
-      mainmenu_tick(args)
-  else
-    puts "Invalid State"
-    args.state.gamestate = :mainmenu
-  end
-end
+  args.state.Current.tick args
 
-def mainmenu_tick args
-  if args.inputs.keyboard.key_up.down || args.inputs.keyboard.key_up.s
-    args.state.MainMenu.down()
-  elsif args.inputs.keyboard.key_up.up || args.inputs.keyboard.key_up.w
-    args.state.MainMenu.up()
+  case args.state.Current.next_state
+  when :mainmenu
+    args.state.Current = MainMenuState.new()
+  when :gameplay
+    puts "Not yet implemented"
+
   end
-  args.outputs.primitives << args.state.Background
-  args.outputs.primitives << args.state.MainMenu.draw()
 end
