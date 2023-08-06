@@ -49,9 +49,9 @@ class MainMenu < Menu
   def initialize
     super
     @menu_items = [
-      {label:"New", message: :new},
-      {label:"Sample", message: :sample},
-      {label:"Item", message: :item}
+      {label:"Start", message: :gameplay},
+      {label:"Quit", message: :quit},
+      {label:"About", message: :about}
     ]
   end
 

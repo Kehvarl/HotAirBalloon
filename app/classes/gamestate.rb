@@ -33,6 +33,9 @@ class MainMenuState < Gamestate
   def tick args
     super
 
+    if @menu.message != nil
+      @next_state = @menu.message
+    end
     args.outputs.primitives << args.state.Background
     args.outputs.primitives << @menu.draw()
   end
