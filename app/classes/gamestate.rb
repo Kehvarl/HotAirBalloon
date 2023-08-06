@@ -4,7 +4,11 @@ class Gamestate
     @next_state = nil
   end
 
+  def handle_keys args
+  end
+
   def tick args
+    handle_keys args
   end
 end
 
@@ -15,13 +19,20 @@ class MainMenuState < Gamestate
     @menu = MainMenu.new()
   end
 
-  def tick args
-    super
+  def handle_keys args
     if args.inputs.keyboard.key_up.down || args.inputs.keyboard.key_up.s
       @menu.down()
     elsif args.inputs.keyboard.key_up.up || args.inputs.keyboard.key_up.w
       @menu.up()
+    elsif args.inputs.keyboard.key_up.enter
+      @menu.select()
+      puts @menu.message
     end
+  end
+
+  def tick args
+    super
+
     args.outputs.primitives << args.state.Background
     args.outputs.primitives << @menu.draw()
   end

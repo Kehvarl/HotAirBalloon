@@ -1,5 +1,5 @@
 class Menu
-  attr_accessor :x, :y, :w, :h, :r, :g, :b, :a, :anchor_x, :anchor_y, :blendmode_enum, :menu_items
+  attr_accessor :x, :y, :w, :h, :r, :g, :b, :a, :anchor_x, :anchor_y, :blendmode_enum, :menu_items, :message
 
   def initialize
     @x = 320
@@ -9,8 +9,9 @@ class Menu
     @r = 0
     @g = 0
     @b = 32
-    @menu_items = ["New", "Sample", "Item"]
+    @menu_items = []
     @selected_item = 0
+    @message = nil
   end
 
   def up
@@ -25,13 +26,17 @@ class Menu
     end
   end
 
+  def select
+    @message = @menu_items[@selected_item].message
+  end
+
   def draw
     menu = [
       {x:@x, y:@y, w:@w, h:@h, r:@r, g:@g, b:@b}.solid!
     ]
 
     @menu_items.each_with_index do |item, index|
-      menu << {x:328, y:532-(40*index), w:640, h:40,  text:item, r:255, g:255, b: 255}.label!
+      menu << {x:328, y:532-(40*index), w:640, h:40,  text:item.label, r:255, g:255, b: 255}.label!
     end
     menu << {x:320, y:500-40*@selected_item, w:640, h:40, b:64, a:215}.solid!
 
@@ -43,12 +48,15 @@ class MainMenu < Menu
 
   def initialize
     super
+    @menu_items = [
+      {label:"New", message: :new},
+      {label:"Sample", message: :sample},
+      {label:"Item", message: :item}
+    ]
   end
-
 
   def draw
     menu = super
-
     menu
   end
 end
