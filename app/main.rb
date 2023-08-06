@@ -6,6 +6,7 @@ def init args
   args.state.gamestate = :mainmenu
   args.state.Background = Background.new()
   args.state.Current = MainMenuState.new()
+  args.state.Previous = nil
 end
 
 
@@ -21,6 +22,9 @@ def tick args
     args.state.Current = MainMenuState.new()
   when :gameplay
     puts "Not yet implemented"
-
+  when :about
+    puts "About Hot Air Balloon"
+  when :quit
+    args.gtk.request_quit
   end
 end
