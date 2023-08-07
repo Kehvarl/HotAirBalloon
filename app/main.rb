@@ -19,11 +19,14 @@ def tick args
 
   case args.state.Current.next_state
   when :mainmenu
+    args.state.Previous = args.stateCurrent
     args.state.Current = MainMenuState.new()
   when :gameplay
     puts "Not yet implemented"
+    args.state.Current.next_state = nil
   when :about
     puts "About Hot Air Balloon"
+    args.state.Current.next_state = nil
   when :quit
     args.gtk.request_quit
   end
