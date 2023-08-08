@@ -1,7 +1,7 @@
 require ('app/classes/background.rb')
 require ('app/classes/mainmenu.rb')
 require ('app/classes/gamestate.rb')
-requite ('app/classes/gameplay.rb')
+require ('app/classes/gameplay.rb')
 
 def init args
   args.state.gamestate = :mainmenu
