@@ -1,6 +1,7 @@
 require ('app/classes/background.rb')
 require ('app/classes/mainmenu.rb')
 require ('app/classes/gamestate.rb')
+require ('app/classes/gameplay.rb')
 
 def init args
   args.state.gamestate = :mainmenu
@@ -22,8 +23,8 @@ def tick args
     args.state.Previous = args.stateCurrent
     args.state.Current = MainMenuState.new()
   when :gameplay
-    puts "Not yet implemented"
-    args.state.Current.next_state = nil
+    args.state.Previous = args.state.Current
+    args.state.Current = Gameplay.new()
   when :about
     puts "About Hot Air Balloon"
     args.state.Current.next_state = nil
