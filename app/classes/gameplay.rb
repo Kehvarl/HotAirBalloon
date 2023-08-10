@@ -1,13 +1,20 @@
 class Balloon
+  attr_accessor :vx, :vy
   def initialize
     @x = 602
     @y = 480
     @w = 64
     @h = 64
+    @vx = 0
+    @vy = 0
   end
 
   def tick
-    @y += [-1,0,0,1].sample()
+    @y += ([-1,0,0,1].sample() + @vy)
+    @vy = @vy - [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1].sample()
+    if @y <= 64
+      @vy = [@vy,0].max
+    end
   end
 
   def draw
@@ -26,6 +33,11 @@ class Gameplay < Gamestate
   end
 
   def handle_keys args
+    if args.inputs.keyboard.key_down.up or args.inputs.keyboard.key_down.w
+      @balloon.vy += 1
+    elsif args.inputs.keyboard.key_down.down or args.inputs.keyboard.key_down.s
+      @balloon.vy -= 1
+    end
   end
 
   def tick args
