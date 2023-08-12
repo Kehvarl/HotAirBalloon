@@ -26,7 +26,7 @@ class Balloon
 end
 
 class Bird
-  attr_accessor :vx, :vy
+  attr_accessor :vx, :vy, :off_screen
   def initialize
     @x = 1280
     @y = [240, 480, 640, 700].sample()
@@ -34,6 +34,7 @@ class Bird
     @h = 32
     @vx = -1
     @vy = 0
+    @off_screen = false
   end
 
   def tick
@@ -41,6 +42,9 @@ class Bird
     @x += @vx
     if @y <= 0 or @y >= 720-@h
       @vy = -@vy
+    end
+    if @x <= 0
+      @off_screen = true
     end
   end
 
@@ -71,6 +75,9 @@ class Gameplay < Gamestate
     super
     @balloon.tick
     @bird.tick
+    if @bird.off_screen
+      @bird = Bird.new()
+    end
     args.outputs.primitives << args.state.Background
     args.outputs.primitives << @balloon.draw()
     args.outputs.primitives << @bird.draw()
