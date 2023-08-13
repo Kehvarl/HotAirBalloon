@@ -26,14 +26,16 @@ class Balloon
 end
 
 class Bird
-  attr_accessor :vx, :vy
+  attr_accessor :vx, :vy, :off_screen
   def initialize
     @x = 1280
     @y = [240, 480, 640, 700].sample()
+    @y += rand(100)-50
     @w = 32
     @h = 32
-    @vx = -1
+    @vx = [-1,-1,-1,-1,-1.5,-2,-3].sample()
     @vy = 0
+    @off_screen = false
   end
 
   def tick
@@ -41,6 +43,9 @@ class Bird
     @x += @vx
     if @y <= 0 or @y >= 720-@h
       @vy = -@vy
+    end
+    if @x <= 0
+      @off_screen = true
     end
   end
 
@@ -56,7 +61,7 @@ class Gameplay < Gamestate
     super
     @menu = MainMenu.new()
     @balloon = Balloon.new()
-    @bird = Bird.new()
+    @birds = []
   end
 
   def handle_keys args
@@ -70,9 +75,22 @@ class Gameplay < Gamestate
   def tick args
     super
     @balloon.tick
-    @bird.tick
+
+    @birds.each do |bird|
+      bird.tick()
+    end
+
+    @birds = @birds.select {|bird| !bird.off_screen}
+
+    while @birds.length < 7 do
+      @birds << Bird.new()
+    end
+
+
     args.outputs.primitives << args.state.Background
     args.outputs.primitives << @balloon.draw()
-    args.outputs.primitives << @bird.draw()
+    @birds.each do |bird|
+      args.outputs.primitives << bird.draw()
+    end
   end
 end
