@@ -39,7 +39,7 @@ class Bird
   end
 
   def tick
-    @y += [-1,0,0,0,0,0,0,0,0,1].sample() + @vy
+    @y += [-2,-1,0,0,0,0,0,1,2].sample() + @vy
     @x += @vx
     if @y <= 0 or @y >= 720-@h
       @vy = -@vy
@@ -65,7 +65,7 @@ class Gameplay < Gamestate
   end
 
   def handle_keys args
-    if args.inputs.keyboard.key_down.up or args.inputs.keyboard.key_down.w
+    if args.inputs.keyboard.key_held.up or args.inputs.keyboard.key_held.w
       @balloon.vy += 1
     elsif args.inputs.keyboard.key_down.down or args.inputs.keyboard.key_down.s
       @balloon.vy -= 1
