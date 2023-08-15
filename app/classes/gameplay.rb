@@ -86,12 +86,11 @@ class Gameplay < Gamestate
       @birds << Bird.new()
     end
 
-
     args.outputs.primitives << args.state.Background
     args.outputs.primitives << @balloon.draw()
     @birds.each do |bird|
       args.outputs.primitives << bird.draw()
     end
   end
-  
+
 end
