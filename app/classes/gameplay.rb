@@ -93,4 +93,5 @@ class Gameplay < Gamestate
       args.outputs.primitives << bird.draw()
     end
   end
+  
 end
