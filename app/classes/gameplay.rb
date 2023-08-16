@@ -30,7 +30,7 @@ class Bird
   def initialize
     @x = 1280
     @y = [240, 480, 640, 700].sample()
-    @y += rand(100)-50
+    @y += rand(240)-120
     @w = 32
     @h = 32
     @vx = [-1,-1,-1,-1,-1.5,-2,-3].sample()
@@ -86,11 +86,11 @@ class Gameplay < Gamestate
       @birds << Bird.new()
     end
 
-
     args.outputs.primitives << args.state.Background
     args.outputs.primitives << @balloon.draw()
     @birds.each do |bird|
       args.outputs.primitives << bird.draw()
     end
   end
+
 end
