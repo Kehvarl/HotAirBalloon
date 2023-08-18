@@ -62,7 +62,7 @@ class Gameplay < Gamestate
     @menu = MainMenu.new()
     @balloon = Balloon.new()
     @birds = []
-    @num_birds = rand(5)
+    @num_birds = rand(7) + 3
   end
 
   def handle_keys args
@@ -83,9 +83,9 @@ class Gameplay < Gamestate
 
     @birds = @birds.select {|bird| !bird.off_screen}
 
-    @num_birds += [-1,0,0,0,0,0,0,0,0,0,0,0,0,1].sample()
+    # @num_birds += [-1,0,1].sample()
 
-    while @birds.length < @num_birds do
+    if rand(100) > 95 and @birds.length < @num_birds
       @birds << Bird.new()
     end
 
