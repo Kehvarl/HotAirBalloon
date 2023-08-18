@@ -83,9 +83,9 @@ class Gameplay < Gamestate
 
     @birds = @birds.select {|bird| !bird.off_screen}
 
-    @num_birds += [-1,0,0,0,0,0,0,0,0,0,0,0,0,1].sample()
+    # @num_birds += [-1,0,1].sample()
 
-    while @birds.length < @num_birds do
+    if rand(100) > 95
       @birds << Bird.new()
     end
 
