@@ -10,8 +10,8 @@ class Bird
     @vx = [-1,-1,-1,-1,-1.5,-2,-3].sample()
     @vy = 0
     @frame = 0
-    @max_frame = 5
-    @flap_rate = 7 + rand(7)
+    @frame_sequence = [1,2,3,4,3,2]
+    @flap_rate = 7 + rand(7) - @vx
     @frame_counter = @flap_rate
     @off_screen = false
   end
@@ -21,7 +21,7 @@ class Bird
     if @frame_counter <= 0
       @frame_counter = @flap_rate
       @frame += 1
-      if @frame > @max_frame
+      if @frame >= @frame_sequence.length()
         @frame = 0
       end
     end
@@ -42,7 +42,7 @@ class Bird
         y: @y,
         w: @w,
         h: @h,
-        path: "sprites/misc/dragon-#{@frame}.png",
+        path: "sprites/misc/dragon-#{@frame_sequence[@frame]}.png",
         flip_horizontally:true
       }.sprite!
     ]
