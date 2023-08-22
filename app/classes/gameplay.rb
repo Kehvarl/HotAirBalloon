@@ -31,7 +31,7 @@ class Gameplay < Gamestate
     @menu = MainMenu.new()
     @balloon = Balloon.new()
     @birds = []
-    @num_birds = rand(7) + 3
+    @num_birds = rand(10) + 3
   end
 
   def handle_keys args
