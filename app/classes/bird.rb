@@ -16,6 +16,10 @@ class Bird
     @off_screen = false
   end
 
+  def collision?
+    false
+  end
+
   def tick
     @frame_counter -= 1
     if @frame_counter <= 0
