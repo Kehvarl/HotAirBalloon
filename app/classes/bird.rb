@@ -10,6 +10,7 @@ class Bird
     @vx = [-1,-1,-1,-1,-1.5,-2,-3].sample()
     @vy = 0
     @frame = 0
+    @sprite = "dragon"
     @frame_sequence = [1,2,3,4,3,2]
     @flap_rate = 7 + rand(7) - @vx
     @frame_counter = @flap_rate
@@ -46,7 +47,7 @@ class Bird
         y: @y,
         w: @w,
         h: @h,
-        path: "sprites/misc/dragon-#{@frame_sequence[@frame]}.png",
+        path: "sprites/misc/#{@sprite}-#{@frame_sequence[@frame]}.png",
         flip_horizontally:true
       }.sprite!
     ]
