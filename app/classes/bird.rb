@@ -19,7 +19,6 @@ class Bird
 
   def collision?
     false
-    
   end
 
   def tick
