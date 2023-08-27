@@ -1,6 +1,6 @@
 
 class Bird
-  attr_accessor :vx, :vy, :off_screen
+  attr_accessor :vx, :vy, :off_screen, :x, :y, :w, :h
   def initialize
     @x = 1280
     @y = [240, 480, 640, 700].sample()
@@ -15,10 +15,6 @@ class Bird
     @flap_rate = 7 + rand(7) - @vx
     @frame_counter = @flap_rate
     @off_screen = false
-  end
-
-  def collision?
-    false
   end
 
   def tick
