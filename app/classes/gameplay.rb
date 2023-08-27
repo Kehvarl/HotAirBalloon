@@ -1,5 +1,5 @@
 class Balloon
-  attr_accessor :vx, :vy
+  attr_accessor :vx, :vy, :x, :y, :w, :h
   def initialize
     @x = 602
     @y = 480
@@ -50,7 +50,11 @@ class Gameplay < Gamestate
       bird.tick()
     end
 
+    collisions = @birds.find_all { |b| args.geometry.intersect_rect? b, @balloon}
+
+
     @birds = @birds.select {|bird| !bird.off_screen}
+    @birds = @birds.select {|bird| !args.geometry.intersect_rect? bird, @balloon}
 
     if rand(100) > 95 and @birds.length < @num_birds
       @birds << Bird.new()
