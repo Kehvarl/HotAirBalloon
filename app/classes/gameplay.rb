@@ -19,7 +19,7 @@ class Balloon
 
   def draw
     [
-      {x: @x, y: @y, w: @w, h: @h, path: 'sprites/circle/blue.png'}.sprite!,
+      {x: @x-16, y: @y, w: 96, h: 128, path: 'sprites/Baloon-Sheet.png'}.sprite!,
       {x: @x+16, y: @y-32, w: @w-32, h: @h-32, path: 'sprites/square/gray.png'}.sprite!
     ]
   end
