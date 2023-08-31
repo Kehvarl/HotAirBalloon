@@ -1,12 +1,17 @@
 class Balloon
-  attr_accessor :vx, :vy, :x, :y, :w, :h
-  def initialize
+  attr_accessor :vx, :vy, :x, :y, :w, :h, :collissions
+  def initialize args
+    @args = args
     @x = 602
     @y = 480
     @w = 64
     @h = 64
     @vx = 0
     @vy = 0
+    @collisions = [
+      {x: @x-16, y: @y+32, w: 96, h: 128},
+      {x: @x, y: @y, w: 32, h: 32}
+    ]
   end
 
   def tick
@@ -17,19 +22,23 @@ class Balloon
     end
   end
 
+  def collision? other
+    @collisions.any?{ |b| @args.geometry.intersect_rect? b, other}
+  end
+
   def draw
     [
-      {x: @x-16, y: @y, w: 96, h: 128, path: 'sprites/Baloon-Sheet.png'}.sprite!,
-      {x: @x+16, y: @y-32, w: @w-32, h: @h-32, path: 'sprites/square/gray.png'}.sprite!
+      {x: @x-16, y: @y+32, w: 96, h: 128, path: 'sprites/Baloon-Sheet.png'}.sprite!,
+      {x: @x+16, y: @y, w: 32, h: 32, path: 'sprites/square/gray.png'}.sprite!
     ]
   end
 end
 
 class Gameplay < Gamestate
-  def initialize
-    super
+  def initialize args
+    super args
     @menu = MainMenu.new()
-    @balloon = Balloon.new()
+    @balloon = Balloon.new(args)
     @birds = []
     @num_birds = rand(10) + 3
   end
@@ -50,7 +59,7 @@ class Gameplay < Gamestate
       bird.tick()
     end
 
-    collisions = @birds.find_all { |b| args.geometry.intersect_rect? b, @balloon}
+    collisions = @birds.find_all { |b| @balloon.collision?(b)}
 
 
     @birds = @birds.select {|bird| !bird.off_screen}

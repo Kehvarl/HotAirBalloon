@@ -1,6 +1,6 @@
 class Gamestate
   attr_accessor :next_state
-  def initialize
+  def initialize args
     @next_state = nil
   end
 
@@ -14,8 +14,8 @@ end
 
 class MainMenuState < Gamestate
 
-  def initialize
-    super
+  def initialize args
+    super args
     @menu = MainMenu.new()
   end
 
