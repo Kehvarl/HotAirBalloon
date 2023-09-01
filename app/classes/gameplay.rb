@@ -8,10 +8,6 @@ class Balloon
     @h = 64
     @vx = 0
     @vy = 0
-    @collisions = [
-      {x: @x-16, y: @y+32, w: 96, h: 128},
-      {x: @x, y: @y, w: 32, h: 32}
-    ]
   end
 
   def tick
@@ -22,15 +18,24 @@ class Balloon
     end
   end
 
+  def collision_boxes
+    [
+      {x: @x-16, y: @y+32, w: 96, h: 128},
+      {x: @x+16, y: @y, w: 32, h: 32}
+    ]
+  end
+
   def collision? other
-    @collisions.any?{ |b| @args.geometry.intersect_rect? b, other}
+    cb = self.collision_boxes
+    cb.any?{ |b| @args.geometry.intersect_rect?(b, other)}
   end
 
   def draw
-    [
+    out = [
       {x: @x-16, y: @y+32, w: 96, h: 128, path: 'sprites/Baloon-Sheet.png'}.sprite!,
       {x: @x+16, y: @y, w: 32, h: 32, path: 'sprites/square/gray.png'}.sprite!
     ]
+    out
   end
 end
 
@@ -63,7 +68,7 @@ class Gameplay < Gamestate
 
 
     @birds = @birds.select {|bird| !bird.off_screen}
-    @birds = @birds.select {|bird| !args.geometry.intersect_rect? bird, @balloon}
+    @birds = @birds.select {|bird| !@balloon.collision?(bird)}
 
     if rand(100) > 95 and @birds.length < @num_birds
       @birds << Bird.new()
