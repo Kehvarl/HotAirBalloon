@@ -1,5 +1,5 @@
 class Balloon
-  attr_accessor :vx, :vy, :x, :y, :w, :h, :collissions
+  attr_accessor :vx, :vy, :x, :y, :w, :h, :collissions, :render_hitbox
   def initialize args
     @args = args
     @x = 602
@@ -8,6 +8,7 @@ class Balloon
     @h = 64
     @vx = 0
     @vy = 0
+    @render_hitbox = true
   end
 
   def tick
@@ -20,7 +21,9 @@ class Balloon
 
   def collision_boxes
     [
-      {x: @x-16, y: @y+32, w: 96, h: 128},
+      {x: @x, y: @y+146, w: 64, h: 16},
+      {x: @x-16, y: @y+48, w: 96, h: 98},
+      {x: @x, y: @y+32, w: 64, h: 16},
       {x: @x+16, y: @y, w: 32, h: 32}
     ]
   end
@@ -35,6 +38,13 @@ class Balloon
       {x: @x-16, y: @y+32, w: 96, h: 128, path: 'sprites/Baloon-Sheet.png'}.sprite!,
       {x: @x+16, y: @y, w: 32, h: 32, path: 'sprites/square/gray.png'}.sprite!
     ]
+
+    if @render_hitbox
+      cb = self.collision_boxes
+      cb.each do |c|
+        out << {x: c.x, y: c.y, w: c.w, h: c.h, r: 255, g: 255, b: 255}.border!
+      end
+    end
     out
   end
 end
