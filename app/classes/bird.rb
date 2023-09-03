@@ -1,6 +1,6 @@
 
 class Bird
-  attr_accessor :vx, :vy, :off_screen, :x, :y, :w, :h
+  attr_accessor :vx, :vy, :off_screen, :x, :y, :w, :h, :render_hitbox
   def initialize
     @x = 1280
     @y = [240, 480, 640, 700].sample()
@@ -15,6 +15,7 @@ class Bird
     @flap_rate = 7 + rand(7) - @vx
     @frame_counter = @flap_rate
     @off_screen = false
+    @render_hitbox = true
   end
 
   def tick
@@ -37,15 +38,16 @@ class Bird
   end
 
   def draw
-    [
-      {
-        x: @x,
-        y: @y,
-        w: @w,
-        h: @h,
+    out = [
+      {x: @x, y: @y, w: @w, h: @h,
         path: "sprites/misc/#{@sprite}-#{@frame_sequence[@frame]}.png",
         flip_horizontally:true
       }.sprite!
     ]
+
+    if @render_hitbox
+      out << {x: @x, y: @y, w: @w, h: @h, r: 255, g: 255, b: 255}.border!
+    end
+    out
   end
 end
