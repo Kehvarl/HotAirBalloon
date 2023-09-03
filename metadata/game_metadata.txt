@@ -1,5 +1,5 @@
 # Remove the pound sign and leading space for the properties below before publishing your game.
-devid=Kehvarl
+devid=kehvarl
 devtitle=Kehvarl
 gameid=hot-air-balloon
 gametitle=Hot Air Balloon
