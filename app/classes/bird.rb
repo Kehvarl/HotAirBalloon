@@ -46,7 +46,7 @@ class Bird
     ]
 
     if @render_hitbox
-      out << {x: @x, y: @y, w: @w, h: @h, r: 255, g: 255, b: 255}.border!
+      out << {x: @x, y: @y, w: @w, h: @h, r: 255, g: 0, b: 0}.border!
     end
     out
   end
