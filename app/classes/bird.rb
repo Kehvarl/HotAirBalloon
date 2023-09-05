@@ -44,7 +44,6 @@ class Bird
         flip_horizontally:true
       }.sprite!
     ]
-
     if @render_hitbox
       out << {x: @x, y: @y, w: @w, h: @h, r: 255, g: 0, b: 0}.border!
     end
