@@ -2,6 +2,7 @@ require ('app/classes/background.rb')
 require ('app/classes/mainmenu.rb')
 require ('app/classes/gamestate.rb')
 require ('app/classes/bird.rb')
+require ('app/classes/balloon.rb')
 require ('app/classes/gameplay.rb')
 
 def init args
