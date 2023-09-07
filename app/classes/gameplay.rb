@@ -1,10 +1,10 @@
 class Gameplay < Gamestate
   def initialize args
     super args
-    @menu = MainMenu.new()
     @balloon = Balloon.new(args)
     @birds = []
     @num_birds = rand(10) + 3
+    args.state.Background  = Playfield.new()
   end
 
   def handle_keys args
@@ -12,6 +12,8 @@ class Gameplay < Gamestate
       @balloon.vy += 1
     elsif args.inputs.keyboard.key_down.down or args.inputs.keyboard.key_down.s
       @balloon.vy -= 1
+    elsif args.inputs.keyboard.key_down.escape
+      @next_state = :mainmenu
     end
   end
 
@@ -33,7 +35,7 @@ class Gameplay < Gamestate
       @birds << Bird.new()
     end
 
-    args.outputs.primitives << args.state.Background
+    args.outputs.primitives << args.state.Background.draw()
     args.outputs.primitives << @balloon.draw()
     @birds.each do |bird|
       args.outputs.primitives << bird.draw()
