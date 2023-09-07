@@ -38,7 +38,7 @@ class Menu
     @menu_items.each_with_index do |item, index|
       menu << {x:328, y:532-(40*index), w:640, h:40,  text:item.label, r:255, g:255, b: 255}.label!
     end
-    menu << {x:320, y:500-40*@selected_item, w:640, h:40, b:64, a:215}.solid!
+    menu << {x:320, y:500-40*@selected_item, w:640, h:40, b:64, a:128}.solid!
 
     menu
   end

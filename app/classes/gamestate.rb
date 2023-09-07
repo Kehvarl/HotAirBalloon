@@ -26,6 +26,9 @@ class MainMenuState < Gamestate
       @menu.up()
     elsif args.inputs.keyboard.key_up.enter
       @menu.select()
+    elsif args.inputs.keyboard.key_down.escape
+      @next_state = :previous
+
     end
   end
 
@@ -36,7 +39,7 @@ class MainMenuState < Gamestate
       @next_state = @menu.message
       @menu.message = nil
     end
-    args.outputs.primitives << args.state.Background
+    args.outputs.primitives << args.state.Background.draw()
     args.outputs.primitives << @menu.draw()
   end
 end
