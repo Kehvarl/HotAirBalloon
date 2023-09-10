@@ -15,6 +15,14 @@ class Playfield < Background
     @mountains = [{x:1000, y:0, w:240, h:320}]
   end
 
+  def mountain_collision? other
+    false
+  end
+
+  def collision? other
+    @mountain_collision? other
+  end
+
   def draw
      out = [@sky, @ground]
      @mountains.each do |m|
