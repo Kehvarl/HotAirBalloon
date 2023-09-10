@@ -12,13 +12,15 @@ class Playfield < Background
     super
     @sky = {x:0, y:0, w:1280, h:720, r:0, g:0, b:192}.solid!
     @ground = {x:0, y:0, w:1280, h:64, r:96, g:64, b:0}.solid!
-    @mountain_x = 1000
+    @mountains = [{x:1000, y:0, w:240, h:320}]
   end
 
   def draw
      out = [@sky, @ground]
-     out << make_mountain(@mountain_x, 0, 240, 320, 64, 64, 64)
-     @mountain_x -= 1
+     @mountains.each do |m|
+       out << make_mountain(m.x, m.y, m.w, m.h, 64, 64, 64)
+       m.x -= 1
+     end
      out
   end
 
