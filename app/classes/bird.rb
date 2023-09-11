@@ -7,7 +7,7 @@ class Bird
     @y += rand(240)-120
     @w = 32
     @h = 32
-    @vx = [-1,-1,-1,-1,-1.5,-2,-3].sample()
+    @vx = [-1.5,-2,-3].sample()
     @vy = 0
     @frame = 0
     @sprite = "dragon"

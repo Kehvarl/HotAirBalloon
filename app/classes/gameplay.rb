@@ -8,7 +8,7 @@ class Gameplay < Gamestate
   end
 
   def handle_keys args
-    if args.inputs.keyboard.key_held.up or args.inputs.keyboard.key_held.w
+    if args.inputs.keyboard.key_down.up or args.inputs.keyboard.key_down.w
       @balloon.vy += 1
     elsif args.inputs.keyboard.key_down.down or args.inputs.keyboard.key_down.s
       @balloon.vy -= 1
