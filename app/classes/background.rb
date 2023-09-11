@@ -12,23 +12,22 @@ class Playfield < Background
     super
     @sky = {x:0, y:0, w:1280, h:720, r:0, g:0, b:192}.solid!
     @ground = {x:0, y:0, w:1280, h:64, r:96, g:64, b:0}.solid!
-    @mountains = [{x:1000, y:0, w:240, h:320}]
-  end
-
-  def mountain_collision? other
-    false
-  end
-
-  def collision? other
-    @mountain_collision? other
+    @mountains = [{x:1000, y:64, w:240, h:320, off_screen:false}]
   end
 
   def draw
      out = [@sky, @ground]
+     if @mountains[-1].x + @mountains[-1].w <= 1300
+       @mountains << {x:rand(25)+1280, y:64, w:rand(240)+120, h:rand(320)+120}
+     end
      @mountains.each do |m|
        out << make_mountain(m.x, m.y, m.w, m.h, 64, 64, 64)
        m.x -= 1
+       if m.x+m.w <= 0
+         m.off_screen = true
+       end
      end
+     @mountains = @mountains.select {|m| !m.off_screen}
      out
   end
 
