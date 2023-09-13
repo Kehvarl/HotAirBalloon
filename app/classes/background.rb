@@ -14,10 +14,24 @@ class Playfield < Background
     @ground = {x:0, y:0, w:1280, h:64, r:96, g:64, b:0}.solid!
     @mountains = [{x:1000, y:64, w:240, h:320, off_screen:false}]
     @bgmountains = [{x:1200, y:64, w:320, h: 640, off_screen:false}]
+    @backmountains = [{x: 1100, y:64, w: 600, h: 660, off_screen:false}]
   end
 
   def draw
      out = [@sky, @ground]
+
+     if @backmountains[-1].x + @backmountains[-1].w <= 1300
+       @backmountains << {x:rand(25)+1280, y:64, w:rand(480)+240, h:rand(480)+240}
+     end
+     @backmountains.each do |m|
+       out << make_mountain(m.x, m.y, m.w, m.h, 32, 32, 16)
+       m.x -= 0.55
+       if m.x+m.w <= 0
+         m.off_screen = true
+       end
+     end
+     @backmountains = @backmountains.select {|m| !m.off_screen}
+
      if @bgmountains[-1].x + @bgmountains[-1].w <= 1300
        @bgmountains << {x:rand(25)+1280, y:64, w:rand(320)+240, h:rand(240)+240}
      end
