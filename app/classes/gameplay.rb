@@ -38,17 +38,14 @@ class Gameplay < Gamestate
     end
 
     @trees.each do |tree|
-      tree.x -=1
-      if tree.x <= 0
-        tree.off_screen = true
-      end
+      tree.tick()
     end
 
     @trees = @trees.select {|tree| !tree.off_screen}
     @spawn_tree -=1
     if @spawn_tree <= 0 and @trees.length < @num_trees
       @spawn_tree = rand(128) + 96
-      @trees << {x:1280, y:64, w:32, h:rand(64) + 64, path:"sprites/square/green.png", off_screen:false}
+      @trees << Tree.new()
     end
 
     args.outputs.primitives << args.state.Background.draw()
@@ -58,7 +55,7 @@ class Gameplay < Gamestate
     end
 
     @trees.each do |tree|
-      args.outputs.primitives << tree
+      args.outputs.primitives << tree.draw()
     end
   end
 
