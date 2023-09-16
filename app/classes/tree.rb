@@ -4,8 +4,9 @@ class Tree
   def initialize
     @x = 1280
     @y = 64
-    @w = 32 + rand(96)
-    @h = 64 + rand(64)
+    @w = 8 + rand(32)
+    @h = 16 + rand(8)
+    @t = 4 + @h/8
     @vx = -1
     @vy = 0
     @frame = 0
@@ -22,15 +23,15 @@ class Tree
 
   def draw
     out = [
-      {x: @x, y: @y, w: 16, h: @h,
+      {x: @x, y: @y, w:@t, h: @h,
         path: "sprites/square/gray.png"
       }.sprite!,
-      {x: @x-(@w/2)+8, y: @y+@h, w: @w, h: @w,
+      {x: @x-(@w/2)+@t/2, y: @y+@h, w: @w, h: @w,
         path: "sprites/square/green.png"
       }.sprite!
     ]
     if @render_hitbox
-      out << {x: @x-(@w/2)+8, y: @y+@h, w: @w, h: @w, r: 255, g: 0, b: 0}.border!
+      out << {x: @x-(@w/2)+@t/2, y: @y+@h, w: @w, h: @w, r: 255, g: 0, b: 0}.border!
     end
     out
   end
