@@ -1,6 +1,7 @@
 require ('app/classes/background.rb')
 require ('app/classes/mainmenu.rb')
 require ('app/classes/gamestate.rb')
+require ('app/classes/about.rb')
 require ('app/classes/bird.rb')
 require ('app/classes/tree.rb')
 require ('app/classes/balloon.rb')
@@ -35,8 +36,8 @@ def tick args
     args.state.Current = Gameplay.new(args)
   when :about
     args.state.Current.next_state = nil
-    puts "About Hot Air Balloon"
-    args.state.Current.next_state = nil
+    args.state.Previous = args.state.Current
+    args.state.Current = About.new(args)
   when :quit
     args.gtk.request_quit
   end
