@@ -26,7 +26,8 @@ class About < Gamestate
       {x:@x, y:@y, w:@w, h:@h, r:@r, g:@g, b:@b}.solid!
     ]
 
-    about << {x:328, y:532, w:640, h:40,  text:"Hot Air Balloon", r:255, g:255, b: 255}.label!
+    about << {x:328, y:532, w:640, h:40, text:"Hot Air Balloon", size_enum: 8, r:255, g:255, b: 255}.label!
+    about << {x:328, y:498, w:640, h:40, text:"Try not to crash", size_enum: 0, r:255, g:255, b: 255}.label!
 
 
     args.outputs.primitives << args.state.Background.draw()
