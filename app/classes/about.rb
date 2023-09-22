@@ -29,6 +29,8 @@ class About < Gamestate
     about << {x:328, y:532, w:640, h:40, text:"Hot Air Balloon", size_enum: 8, r:255, g:255, b: 255}.label!
     about << {x:328, y:498, w:640, h:40, text:"Try not to crash", size_enum: 0, r:255, g:255, b: 255}.label!
 
+    # Need a better solution to this
+    # I bet I could use some automation to clean it up
 
     args.outputs.primitives << args.state.Background.draw()
     args.outputs.primitives << about
