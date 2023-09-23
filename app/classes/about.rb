@@ -9,6 +9,14 @@ class About < Gamestate
       @r = 0
       @g = 0
       @b = 32
+      @title = "About: Hot Air Balloon"
+      @text = [
+        "Welcome to the thrilling game of Hot Air Ballon!",
+        "Use the arrow keys to raise and lower your balloon.",
+        "Try not to get tangled in any trees!",
+        "And watch out for the migrating dragonlings,",
+        "they'll damage your balloon and slow you down."
+      ]
   end
 
   def handle_keys args
