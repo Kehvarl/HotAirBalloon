@@ -15,7 +15,7 @@ class Bird
     @flap_rate = 7 + rand(7) - @vx
     @frame_counter = @flap_rate
     @off_screen = false
-    @render_hitbox = true
+    @render_hitbox = false
   end
 
   def tick

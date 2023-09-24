@@ -11,7 +11,7 @@ class Tree
     @vy = 0
     @frame = 0
     @off_screen = false
-    @render_hitbox = true
+    @render_hitbox = false
   end
 
   def tick
@@ -35,5 +35,5 @@ class Tree
     end
     out
   end
-  
+
 end

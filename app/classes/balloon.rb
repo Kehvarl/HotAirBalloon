@@ -8,7 +8,7 @@ class Balloon
     @h = 64
     @vx = 0
     @vy = 0
-    @render_hitbox = true
+    @render_hitbox = false
   end
 
   def tick
