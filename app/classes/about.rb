@@ -34,8 +34,10 @@ class About < Gamestate
       {x:@x, y:@y, w:@w, h:@h, r:@r, g:@g, b:@b}.solid!
     ]
 
-    about << {x:328, y:532, w:640, h:40, text:"Hot Air Balloon", size_enum: 8, r:255, g:255, b: 255}.label!
-    about << {x:328, y:498, w:640, h:40, text:"Try not to crash", size_enum: 0, r:255, g:255, b: 255}.label!
+    about << {x:328, y:532, w:640, h:40, text:@title, size_enum: 8, r:255, g:255, b: 255}.label!
+    @text.each_with_index do |line, index|
+      about << {x:328, y:488-(20*index), w:640, h:40, text:line, size_enum: 0, r:255, g:255, b: 255}.label!
+    end
 
     # Need a better solution to this
     # I bet I could use some automation to clean it up
