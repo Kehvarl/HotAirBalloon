@@ -15,10 +15,10 @@ class About < Gamestate
         "Use the arrow keys to raise and lower your balloon.",
         "Try not to get tangled in any trees!",
         "And watch out for the migrating dragonlings,",
-        "they'll damage your balloon and slow you down."
-        ""
-        ""
-        ""
+        "they'll damage your balloon and slow you down.",
+        "",
+        "",
+        "",
         "ESC to return to Menu."
       ]
   end

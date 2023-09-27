@@ -29,9 +29,12 @@ class Gameplay < Gamestate
     end
 
     collisions = @birds.find_all { |b| @balloon.collision?(b)}
+    treecollision = @trees.find_all {|t| @balloon.collision?(t.hitbox)}
 
     @birds = @birds.select {|bird| !bird.off_screen}
     @birds = @birds.select {|bird| !@balloon.collision?(bird)}
+
+    @trees = @trees.select{|tree| !treecollision.any?(tree)}
 
     if rand(100) > 95 and @birds.length < @num_birds
       @birds << Bird.new()
