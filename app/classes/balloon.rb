@@ -11,7 +11,7 @@ class Balloon
     @render_hitbox = false
   end
 
-  def tick
+  def tick speed
     @y += ([-1,0,0,1].sample() + @vy)
     @vy = @vy - [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1].sample()
     if @y <= 64

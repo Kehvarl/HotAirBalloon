@@ -8,6 +8,7 @@ class Gameplay < Gamestate
     @num_trees = rand(8) + 4
     @spawn_tree = 0
     args.state.Background  = Playfield.new()
+    @speed = 1
   end
 
   def handle_keys args
@@ -22,10 +23,10 @@ class Gameplay < Gamestate
 
   def tick args
     super
-    @balloon.tick
+    @balloon.tick @speed
 
     @birds.each do |bird|
-      bird.tick()
+      bird.tick 1
     end
 
     collisions = @birds.find_all { |b| @balloon.collision?(b)}
@@ -36,12 +37,17 @@ class Gameplay < Gamestate
 
     @trees = @trees.select{|tree| !treecollision.any?(tree)}
 
+    if treecollision.length > 0
+        @speed = 0
+        args.state.Background.speed = 0
+    end
+
     if rand(100) > 95 and @birds.length < @num_birds
       @birds << Bird.new()
     end
 
     @trees.each do |tree|
-      tree.tick()
+      tree.tick @speed
     end
 
     @trees = @trees.select {|tree| !tree.off_screen}
