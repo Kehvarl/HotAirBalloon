@@ -8,8 +8,10 @@ class Background
 end
 
 class Playfield < Background
+  attr_accessor :speed
   def initialize
     super
+    @speed = 1
     @sky = {x:0, y:0, w:1280, h:720, r:0, g:0, b:192}.solid!
     @ground = {x:0, y:0, w:1280, h:64, r:96, g:64, b:0}.solid!
     @mountains = [{x:1000, y:64, w:240, h:320, off_screen:false}]
@@ -25,7 +27,7 @@ class Playfield < Background
      end
      @backmountains.each do |m|
        out << make_mountain(m.x, m.y, m.w, m.h, 32, 32, 16)
-       m.x -= 0.55
+       m.x -= @speed * 0.55
        if m.x+m.w <= 0
          m.off_screen = true
        end
@@ -37,7 +39,7 @@ class Playfield < Background
      end
      @bgmountains.each do |m|
        out << make_mountain(m.x, m.y, m.w, m.h, 96, 96, 8)
-       m.x -= 0.66
+       m.x -= @speed * 0.66
        if m.x+m.w <= 0
          m.off_screen = true
        end
@@ -49,7 +51,7 @@ class Playfield < Background
      end
      @mountains.each do |m|
        out << make_mountain(m.x, m.y, m.w, m.h, 64, 64, 64)
-       m.x -= 1
+       m.x -= @speed
        if m.x+m.w <= 0
          m.off_screen = true
        end

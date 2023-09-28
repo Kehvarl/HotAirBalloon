@@ -14,8 +14,8 @@ class Tree
     @render_hitbox = false
   end
 
-  def tick
-    @x += @vx
+  def tick  speed
+    @x += @vx * speed
     if @x <= 0
       @off_screen = true
     end

@@ -18,7 +18,7 @@ class Bird
     @render_hitbox = false
   end
 
-  def tick
+  def tick speed
     @frame_counter -= 1
     if @frame_counter <= 0
       @frame_counter = @flap_rate
@@ -28,7 +28,7 @@ class Bird
       end
     end
     @y += [-2,-1,0,0,0,0,0,1,2].sample() + @vy
-    @x += @vx
+    @x += @vx * speed
     if @y <= 0 or @y >= 720-@h
       @vy = -@vy
     end
