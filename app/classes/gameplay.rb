@@ -9,6 +9,7 @@ class Gameplay < Gamestate
     @spawn_tree = 0
     args.state.Background  = Playfield.new()
     @speed = 1
+    @stopped = -1
   end
 
   def handle_keys args
@@ -40,6 +41,16 @@ class Gameplay < Gamestate
     if treecollision.length > 0
         @speed = 0
         args.state.Background.speed = 0
+        @stopped = rand(100)
+    end
+
+    if @stopped > 0
+      @stopped -= 1
+      if @stopped <= 0
+        @stopped = -1
+        @speed = 1
+        args.state.Background.speed = 1
+      end
     end
 
     if rand(100) > 95 and @birds.length < @num_birds
